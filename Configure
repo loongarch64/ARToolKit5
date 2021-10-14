@@ -284,6 +284,10 @@ then
             fi
             LDFLAG="-L/usr/lib"
             ;;
+        loongarch64)
+            CFLAG="-O3 -fPIC -DHAVE_NFT=1"
+            LDFLAG="-L/usr/lib/loongarch64-linux-gnu -L/usr/lib"
+            ;;
         x86_64)
             CFLAG="-O3 -fPIC -march=core2 -DHAVE_NFT=1"
             LDFLAG="-L/usr/lib/x86_64-linux-gnu -L/usr/lib64"
@@ -622,7 +626,7 @@ exit 0
 fi
 
 case "$MACHINE" in
-arm*)
+arm*|loongarch*)
 cat >> $SED <<EOF
 s/#define HAVE_INTEL_SIMD.*/#undef HAVE_INTEL_SIMD/
 EOF
